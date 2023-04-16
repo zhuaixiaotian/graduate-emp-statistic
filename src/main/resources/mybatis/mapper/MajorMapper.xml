@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roadjava.statistic.mapper.MajorMapper">
+  <sql id="fromComm">
+    from major
+  </sql>
+  <sql id="whereComm">
+    <where>
+      <if test='majorName != null and majorName !=""'>
+        and major_name like concat('%',#{majorName},'%')
+      </if>
+    </where>
+  </sql>
+  <insert id="insert">
+    insert into major (major_name) values (#{majorName})
+  </insert>
+  <delete id="deleteById">
+        delete from major where id = #{id}
+    </delete>
+  <select id="listByPage" resultType="majorVO">
+    select *
+    <include refid="fromComm"></include>
+    <include refid="whereComm"></include>
+    order by id desc
+  </select>
+
+  <select id="selectOneById" resultType="majorVO">
+    select * from major where id = #{id}
+  </select>
+
+  <update id="update">
+    update major
+    <set>
+      <if test='majorName != null and majorName != ""'>
+        major_name = #{majorName}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

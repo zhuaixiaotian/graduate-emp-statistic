@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roadjava.statistic.mapper.ClazzMapper">
+  <sql id="fromComm">
+    from clazz c
+    join major m on c.major_id = m.id
+  </sql>
+  <sql id="whereComm">
+    <where>
+      <if test='clazzName != null and clazzName !=""'>
+        and c.clazz_name like concat('%',#{clazzName},'%')
+      </if>
+      <if test='graduateYear != null'>
+        and c.graduate_year = #{graduateYear}
+      </if>
+      <if test='majorId != null and majorId != -1'>
+        and c.major_id = #{majorId}
+      </if>
+    </where>
+  </sql>
+  <insert id="insert">
+    insert into clazz (
+      clazz_name,
+      graduate_year,
+      major_id
+    ) values (
+      #{clazzName},
+      #{graduateYear},
+      #{majorId}
+    )
+  </insert>
+  <delete id="deleteById">
+        delete from clazz where id = #{id}
+    </delete>
+  <delete id="deleteByIds">
+    delete from clazz where id in
+    <foreach item="oneItem" collection="list" separator="," open="(" close=")">
+      #{oneItem}
+    </foreach>
+  </delete>
+  <select id="listByPage" resultType="clazzVO">
+    select c.*,m.major_name
+    <include refid="fromComm"></include>
+    <include refid="whereComm"></include>
+    order by c.id desc
+  </select>
+
+  <select id="selectOneById" resultType="clazzVO">
+    select c.*,m.major_name
+    <include refid="fromComm"></include>
+     where c.id = #{id}
+  </select>
+  <select id="selectClazzIdsByMajorId" resultType="java.lang.Long">
+    select id from clazz where major_id = #{majorId}
+  </select>
+
+  <update id="update">
+    update clazz
+    <set>
+      <if test='clazzName != null and clazzName != ""'>
+        clazz_name = #{clazzName},
+      </if>
+      <if test='graduateYear != null'>
+        graduate_year = #{graduateYear},
+      </if>
+      <if test='majorId != null'>
+        major_id = #{majorId}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>

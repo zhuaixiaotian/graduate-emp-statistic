@@ -1,0 +1,36 @@
+#mybatis
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
+#hikari连接池
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/statistic?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      connection-timeout: 30000 #30*1000ms
+      idle-timeout: 600000 #10*60*1000ms
+      max-lifetime: 1800000 #30*60*1000ms
+      connection-test-query: select 1
+  freemarker:
+    cache: false
+    expose-request-attributes: true #默认false
+    expose-session-attributes: true #默认false
+    expose-spring-macro-helpers: true #默认true
+    suffix: .ftl #spring-boot2.2.0改为了ftlh
+    settings:
+      {datetimeFormat: yyyy-MM-dd HH:mm:ss}
+    request-context-attribute: rc
+
+# 配置文件上传路径
+auth:
+  ignore-handlers:
+    - /
+    - /login
+    # 所有以/resources开头的路径
+    - /resources/**

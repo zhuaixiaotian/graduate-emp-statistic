@@ -1,0 +1,59 @@
+#login-bg {
+    background: url("../image/bg.png") no-repeat;
+    background-size:100% 100%;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+.text-center {
+    text-align: center;
+}
+.mt-2 {
+    margin-top: 2rem;
+}
+.mt-3 {
+    margin-top: 3rem;
+}
+.mt-7 {
+    margin-top: 7rem;
+}
+.d-none {
+    display: none;
+}
+.ml-2 {
+    margin-left: 2rem;
+}
+.mr-3 {
+    margin-right: 3rem;
+}
+.mt-d7 {
+    margin: .7rem 0 .1rem 0;
+}
+.header-bar {
+    margin-top: .3rem;
+}
+.header-bar .layui-form-item{
+    margin-bottom: 0;
+}
+.align-center{
+    margin: 0 auto;
+}
+.white{
+    color: white;
+}
+.system-title{
+    margin-left: 155px;
+    padding: 20px 20px 30px;
+}
+/*layui一些样式的调整*/
+.layui-form-checkbox i{
+    top:5px;
+}
+/*layui的checkbox布局有问题*/
+.layui-form-checkbox[lay-skin=primary] span {
+    height: 18px !important;
+}
+.layui-form-checkbox i {
+    top:1px;
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roadjava.statistic.mapper.StatisticMapper">
+
+
+  <select id="selectGraduateYears" resultType="clazzVO">
+    select distinct graduate_year from clazz order by graduate_year desc
+  </select>
+  <select id="loadAllMajorEmpRatioRank" resultType="barCO">
+    select
+    m.major_name xAxisName,
+    round(count(sj.id) /count(s.id),4)*100 yAxisValue
+    from student s
+    join (select * from clazz where graduate_year = #{graduateYear}) c on c.id = s.clazz_id
+    join major m on c.major_id = m.id
+    left join student_job sj on s.id = sj.student_id
+    group by m.major_name
+    order by yAxisValue desc,m.id desc
+  </select>
+  <select id="loadTrend" resultType="java.util.Map">
+    select
+    m.major_name majorName,
+    c.graduate_year as graduateYear,
+    round(count(sj.id) /count(s.id),4)*100 ratio
+    from (
+        select * from major where id in
+        <foreach item="oneItem" collection="majorIds" separator="," open="(" close=")">
+          #{oneItem}
+        </foreach>
+    ) m
+    join clazz c on c.major_id = m.id
+    join student s on c.id = s.clazz_id
+    left join student_job sj on s.id = sj.student_id
+    group by m.major_name,c.graduate_year
+    order by majorName,graduateYear
+  </select>
+  <select id="loadCompanyRatio" resultType="java.util.Map">
+    select
+      company.company_name name,
+      count(sj.id) companyHireCount
+    from company company
+    join job job on job.company_id = company.id
+    <!--只查选中年份的学生-->
+    join (
+      select sj.* from student_job sj
+      join student s on sj.student_id = s.id
+      join (select * from clazz where graduate_year = #{graduateYear}) c on c.id = s.clazz_id
+    ) sj on job.id = sj.job_id
+    group by company.company_name
+  </select>
+  <select id="loadSexRatio" resultType="java.util.Map">
+    select
+      s.sex as name,
+      count(sj.id) sexHasJobCount
+    from student_job sj
+    join student s on s.id = sj.student_id
+    join (select * from clazz where graduate_year = #{graduateYear}) c on c.id = s.clazz_id
+    group by s.sex
+  </select>
+</mapper>

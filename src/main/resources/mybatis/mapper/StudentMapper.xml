@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roadjava.statistic.mapper.StudentMapper">
+  <sql id="fromComm">
+    <!--学生基本信息-->
+    from student s
+    <!--学生班级信息-->
+    join clazz c on s.clazz_id = c.id
+    <!--学生专业信息-->
+    join major m on c.major_id = m.id
+    <!--学生就业信息-->
+    left join student_job sj on s.id = sj.student_id
+    left join job job on sj.job_id = job.id
+    left join company company on company.id = job.company_id
+  </sql>
+  <sql id="whereComm">
+    <where>
+      <if test='studentName != null and studentName !=""'>
+        and s.student_name like concat('%',#{studentName},'%')
+      </if>
+      <if test='sex != null and sex !=""'>
+        and s.sex = #{sex}
+      </if>
+      <if test='hasJob =="Y"'>
+        and sj.student_id is not null
+      </if>
+      <if test='hasJob =="N"'>
+        and sj.student_id is null
+      </if>
+      <if test='graduateYear != null'>
+        and c.graduate_year = #{graduateYear}
+      </if>
+      <if test='majorId != null and majorId != -1'>
+        and c.major_id = #{majorId}
+      </if>
+    </where>
+  </sql>
+  <insert id="insert">
+    insert into student (
+      student_name,
+      sex,
+      clazz_id
+    ) values (
+      #{studentName},
+      #{sex},
+      #{clazzId}
+    )
+  </insert>
+  <delete id="deleteById">
+        delete from student where id = #{id}
+    </delete>
+  <delete id="deleteByClazzIds">
+    delete from student where clazz_id in
+    <foreach item="oneItem" collection="list" separator="," open="(" close=")">
+      #{oneItem}
+    </foreach>
+  </delete>
+  <sql id="clnCommon">
+    s.*,
+    c.clazz_name,c.graduate_year,c.major_id,
+    m.major_name,
+    sj.id as studentJobId,
+    job.job_name,
+    company.company_name
+  </sql>
+  <select id="listByPage" resultType="studentVO">
+    select
+    <include refid="clnCommon"></include>
+    <include refid="fromComm"></include>
+    <include refid="whereComm"></include>
+    order by s.id desc
+  </select>
+
+  <select id="selectOneById" resultType="studentVO">
+    select <include refid="clnCommon"></include>
+    <include refid="fromComm"></include>
+     where s.id = #{id}
+  </select>
+
+  <update id="update">
+    update student
+    <set>
+      <if test='studentName != null and studentName != ""'>
+        student_name = #{studentName},
+      </if>
+      <if test='sex != null and sex != ""'>
+        sex = #{sex},
+      </if>
+      <if test='clazzId != null'>
+        clazz_id = #{clazzId}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+</mapper>
