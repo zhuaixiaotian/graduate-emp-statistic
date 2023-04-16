@@ -7,8 +7,9 @@ import org.springframework.beans.BeanUtils;
 
 /**
  * 班级信息
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Data
 public class ClazzDTO extends BaseDTO{

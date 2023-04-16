@@ -3,8 +3,9 @@ package com.roadjava.statistic.util;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 public class BasePathUtil {
     public static String getBasePath(HttpServletRequest request) {

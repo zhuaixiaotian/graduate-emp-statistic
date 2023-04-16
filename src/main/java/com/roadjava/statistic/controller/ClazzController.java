@@ -1,11 +1,10 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
-import com.roadjava.statistic.bean.dto.MajorDTO;
-import com.roadjava.statistic.bean.entity.Major;
+import com.roadjava.statistic.bean.dto.ClazzDTO;
 import com.roadjava.statistic.bean.res.ResultDTO;
 import com.roadjava.statistic.bean.res.TableResult;
-import com.roadjava.statistic.bean.vo.MajorVO;
-import com.roadjava.statistic.service.MajorService;
+import com.roadjava.statistic.bean.vo.ClazzVO;
+import com.roadjava.statistic.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 专业控制器
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * 班级控制器
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
-@RequestMapping("/major")
+@RequestMapping("/clazz")
 @Slf4j
-public class MajorHandler {
+public class ClazzController {
     @Resource
-    private MajorService majorService;
+    private ClazzService clazzService;
 
     @PostMapping("/add") @ResponseBody
-    public ResultDTO<String> add(MajorDTO dto){
-        return majorService.add(dto);
+    public ResultDTO<String> add(ClazzDTO dto){
+        return clazzService.add(dto);
     }
     /**
      * 根据id删除
@@ -38,7 +38,7 @@ public class MajorHandler {
         if (id == null) {
             return ResultDTO.buildFailure("id必传");
         }
-        return majorService.deleteById(id);
+        return clazzService.deleteById(id);
     }
 
     /**
@@ -47,32 +47,32 @@ public class MajorHandler {
     @GetMapping("/toEdit")
     public String deleteById(@RequestParam("selectedId") Long selectedId, HttpServletRequest request){
         request.setAttribute("selectedId",selectedId);
-        return "school/major/edit";
+        return "school/clazz/edit";
     }
 
     /**
      * 根据主键查询用于回显
      */
     @PostMapping("/selectOneById") @ResponseBody
-    public ResultDTO<MajorVO> selectOneById(@RequestParam("id") Long id) {
-        return majorService.selectOneById(id);
+    public ResultDTO<ClazzVO> selectOneById(@RequestParam("id") Long id) {
+        return clazzService.selectOneById(id);
     }
 
     /**
      * 根据主键更新
      */
     @PostMapping("/update") @ResponseBody
-    public ResultDTO<String> update(MajorDTO dto) {
-        return majorService.update(dto);
+    public ResultDTO<String> update(ClazzDTO dto) {
+        return clazzService.update(dto);
     }
 
     /**
      * 加载表格
      */
     @PostMapping("/loadTable") @ResponseBody
-    public ResultDTO<TableResult<MajorVO>> loadTable(MajorDTO dto){
-        TableResult<MajorVO> tableResult=new TableResult<>();
-        ResultDTO<List<MajorVO>> result = majorService.loadTable(dto);
+    public ResultDTO<TableResult<ClazzVO>> loadTable(ClazzDTO dto){
+        TableResult<ClazzVO> tableResult=new TableResult<>();
+        ResultDTO<List<ClazzVO>> result = clazzService.loadTable(dto);
         tableResult.setTotalCount(result.getTotal());
         tableResult.setRows(result.getData());
         return ResultDTO.buildSuccess(tableResult);
@@ -81,7 +81,7 @@ public class MajorHandler {
      * 加载所有
      */
     @PostMapping("/selectAll") @ResponseBody
-    public ResultDTO<List<MajorVO>> selectAll(){
-        return majorService.selectAll();
+    public ResultDTO<List<ClazzVO>> selectAll(){
+        return clazzService.selectAll();
     }
 }

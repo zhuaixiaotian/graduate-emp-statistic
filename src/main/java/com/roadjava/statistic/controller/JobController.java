@@ -1,12 +1,10 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
-import com.roadjava.statistic.bean.dto.ClazzDTO;
-import com.roadjava.statistic.bean.dto.MajorDTO;
+import com.roadjava.statistic.bean.dto.JobDTO;
 import com.roadjava.statistic.bean.res.ResultDTO;
 import com.roadjava.statistic.bean.res.TableResult;
-import com.roadjava.statistic.bean.vo.ClazzVO;
-import com.roadjava.statistic.bean.vo.MajorVO;
-import com.roadjava.statistic.service.ClazzService;
+import com.roadjava.statistic.bean.vo.JobVO;
+import com.roadjava.statistic.service.JobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,20 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 班级控制器
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * 岗位控制器
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
-@RequestMapping("/clazz")
+@RequestMapping("/job")
 @Slf4j
-public class ClazzHandler {
+public class JobController {
     @Resource
-    private ClazzService clazzService;
+    private JobService jobService;
 
     @PostMapping("/add") @ResponseBody
-    public ResultDTO<String> add(ClazzDTO dto){
-        return clazzService.add(dto);
+    public ResultDTO<String> add(JobDTO dto){
+        return jobService.add(dto);
     }
     /**
      * 根据id删除
@@ -39,7 +38,7 @@ public class ClazzHandler {
         if (id == null) {
             return ResultDTO.buildFailure("id必传");
         }
-        return clazzService.deleteById(id);
+        return jobService.deleteById(id);
     }
 
     /**
@@ -48,41 +47,41 @@ public class ClazzHandler {
     @GetMapping("/toEdit")
     public String deleteById(@RequestParam("selectedId") Long selectedId, HttpServletRequest request){
         request.setAttribute("selectedId",selectedId);
-        return "school/clazz/edit";
+        return "enterprise/job/edit";
     }
 
     /**
      * 根据主键查询用于回显
      */
     @PostMapping("/selectOneById") @ResponseBody
-    public ResultDTO<ClazzVO> selectOneById(@RequestParam("id") Long id) {
-        return clazzService.selectOneById(id);
+    public ResultDTO<JobVO> selectOneById(@RequestParam("id") Long id) {
+        return jobService.selectOneById(id);
     }
 
     /**
      * 根据主键更新
      */
     @PostMapping("/update") @ResponseBody
-    public ResultDTO<String> update(ClazzDTO dto) {
-        return clazzService.update(dto);
+    public ResultDTO<String> update(JobDTO dto) {
+        return jobService.update(dto);
     }
 
     /**
      * 加载表格
      */
     @PostMapping("/loadTable") @ResponseBody
-    public ResultDTO<TableResult<ClazzVO>> loadTable(ClazzDTO dto){
-        TableResult<ClazzVO> tableResult=new TableResult<>();
-        ResultDTO<List<ClazzVO>> result = clazzService.loadTable(dto);
+    public ResultDTO<TableResult<JobVO>> loadTable(JobDTO dto){
+        TableResult<JobVO> tableResult=new TableResult<>();
+        ResultDTO<List<JobVO>> result = jobService.loadTable(dto);
         tableResult.setTotalCount(result.getTotal());
         tableResult.setRows(result.getData());
         return ResultDTO.buildSuccess(tableResult);
     }
     /**
-     * 加载所有
+     * 加载某个公司的所有岗位
      */
-    @PostMapping("/selectAll") @ResponseBody
-    public ResultDTO<List<ClazzVO>> selectAll(){
-        return clazzService.selectAll();
+    @PostMapping("/selectByCompanyId") @ResponseBody
+    public ResultDTO<List<JobVO>> selectByCompanyId(@RequestParam("companyId") Long companyId){
+        return jobService.selectByCompanyId(companyId);
     }
 }

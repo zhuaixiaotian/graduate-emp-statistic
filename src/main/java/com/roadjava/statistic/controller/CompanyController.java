@@ -1,11 +1,9 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
 import com.roadjava.statistic.bean.dto.CompanyDTO;
-import com.roadjava.statistic.bean.dto.MajorDTO;
 import com.roadjava.statistic.bean.res.ResultDTO;
 import com.roadjava.statistic.bean.res.TableResult;
 import com.roadjava.statistic.bean.vo.CompanyVO;
-import com.roadjava.statistic.bean.vo.MajorVO;
 import com.roadjava.statistic.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
 @RequestMapping("/company")
 @Slf4j
-public class CompanyHandler {
+public class CompanyController {
     @Resource
     private CompanyService companyService;
     

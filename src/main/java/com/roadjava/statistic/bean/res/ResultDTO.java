@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Data
 public class ResultDTO<T> {
+
     private String errCode;
     private String errMsg;
     /**
@@ -19,29 +21,31 @@ public class ResultDTO<T> {
     private Boolean success = Boolean.TRUE;
     private T data;
     private Long total;
-    private Map<String,Object> attributes = new HashMap<>();
-    private ResultDTO(){
+    private Map<String, Object> attributes = new HashMap<>();
+
+    private ResultDTO() {
     }
 
-    public void addAttr(String key,Object value){
-        this.attributes.put(key,value);
+    public void addAttr(String key, Object value) {
+        this.attributes.put(key, value);
     }
 
-    public static <T> ResultDTO<T> buildSuccess(T t, Long total){
+    public static <T> ResultDTO<T> buildSuccess(T t, Long total) {
         ResultDTO<T> resultDTO = buildSuccess(t);
         resultDTO.setTotal(total);
         return resultDTO;
     }
 
-    public static <T> ResultDTO<T> buildEmptySuccess(){
+    public static <T> ResultDTO<T> buildEmptySuccess() {
         return new ResultDTO<>();
     }
 
-    public static <T> ResultDTO<T> buildSuccess(T t){
+    public static <T> ResultDTO<T> buildSuccess(T t) {
         ResultDTO<T> resultDTO = new ResultDTO<>();
         resultDTO.setData(t);
         return resultDTO;
     }
+
     public static <T> ResultDTO<T> buildFailure(String code, String errMsg) {
         ResultDTO<T> resultDTO = new ResultDTO<>();
         resultDTO.setErrCode(code);
@@ -51,7 +55,7 @@ public class ResultDTO<T> {
     }
 
     public static <T> ResultDTO<T> buildFailure(String errMsg) {
-        return buildFailure(null,errMsg);
+        return buildFailure(null, errMsg);
     }
 
 }

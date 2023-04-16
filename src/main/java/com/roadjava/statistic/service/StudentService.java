@@ -9,8 +9,9 @@ import com.roadjava.statistic.bean.vo.StudentVO;
 import java.util.List;
 
 /**
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 public interface StudentService {
     /**

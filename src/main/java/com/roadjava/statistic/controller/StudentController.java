@@ -1,11 +1,10 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
-import com.roadjava.statistic.bean.dto.JobDTO;
+import com.roadjava.statistic.bean.dto.StudentDTO;
 import com.roadjava.statistic.bean.res.ResultDTO;
 import com.roadjava.statistic.bean.res.TableResult;
-import com.roadjava.statistic.bean.vo.JobVO;
-import com.roadjava.statistic.service.ClazzService;
-import com.roadjava.statistic.service.JobService;
+import com.roadjava.statistic.bean.vo.StudentVO;
+import com.roadjava.statistic.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 岗位控制器
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * 学生控制器
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
-@RequestMapping("/job")
+@RequestMapping("/student")
 @Slf4j
-public class JobHandler {
+public class StudentController {
     @Resource
-    private JobService jobService;
+    private StudentService studentService;
 
     @PostMapping("/add") @ResponseBody
-    public ResultDTO<String> add(JobDTO dto){
-        return jobService.add(dto);
+    public ResultDTO<String> add(StudentDTO dto){
+        return studentService.add(dto);
     }
     /**
      * 根据id删除
@@ -38,7 +38,7 @@ public class JobHandler {
         if (id == null) {
             return ResultDTO.buildFailure("id必传");
         }
-        return jobService.deleteById(id);
+        return studentService.deleteById(id);
     }
 
     /**
@@ -47,41 +47,34 @@ public class JobHandler {
     @GetMapping("/toEdit")
     public String deleteById(@RequestParam("selectedId") Long selectedId, HttpServletRequest request){
         request.setAttribute("selectedId",selectedId);
-        return "enterprise/job/edit";
+        return "school/student/edit";
     }
 
     /**
      * 根据主键查询用于回显
      */
     @PostMapping("/selectOneById") @ResponseBody
-    public ResultDTO<JobVO> selectOneById(@RequestParam("id") Long id) {
-        return jobService.selectOneById(id);
+    public ResultDTO<StudentVO> selectOneById(@RequestParam("id") Long id) {
+        return studentService.selectOneById(id);
     }
 
     /**
      * 根据主键更新
      */
     @PostMapping("/update") @ResponseBody
-    public ResultDTO<String> update(JobDTO dto) {
-        return jobService.update(dto);
+    public ResultDTO<String> update(StudentDTO dto) {
+        return studentService.update(dto);
     }
 
     /**
-     * 加载表格
+     * 加载求职表格
      */
     @PostMapping("/loadTable") @ResponseBody
-    public ResultDTO<TableResult<JobVO>> loadTable(JobDTO dto){
-        TableResult<JobVO> tableResult=new TableResult<>();
-        ResultDTO<List<JobVO>> result = jobService.loadTable(dto);
+    public ResultDTO<TableResult<StudentVO>> loadTable(StudentDTO dto){
+        TableResult<StudentVO> tableResult=new TableResult<>();
+        ResultDTO<List<StudentVO>> result = studentService.loadTable(dto);
         tableResult.setTotalCount(result.getTotal());
         tableResult.setRows(result.getData());
         return ResultDTO.buildSuccess(tableResult);
-    }
-    /**
-     * 加载某个公司的所有岗位
-     */
-    @PostMapping("/selectByCompanyId") @ResponseBody
-    public ResultDTO<List<JobVO>> selectByCompanyId(@RequestParam("companyId") Long companyId){
-        return jobService.selectByCompanyId(companyId);
     }
 }

@@ -1,30 +1,25 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
 import com.roadjava.statistic.bean.entity.Admin;
 import com.roadjava.statistic.bean.res.ResultDTO;
 import com.roadjava.statistic.service.AdminService;
 import com.roadjava.statistic.util.Constants;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 
 /**
  * 管理员控制器
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
-public class AdminHandler {
+public class AdminController {
     @Resource
     private AdminService adminService;
 

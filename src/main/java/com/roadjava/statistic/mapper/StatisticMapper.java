@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 public interface StatisticMapper {
     List<ClazzVO> selectGraduateYears();

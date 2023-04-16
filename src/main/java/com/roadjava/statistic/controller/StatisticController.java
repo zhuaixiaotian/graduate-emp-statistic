@@ -1,13 +1,9 @@
-package com.roadjava.statistic.handler;
+package com.roadjava.statistic.controller;
 
 import com.roadjava.statistic.bean.dto.ChartDTO;
-import com.roadjava.statistic.bean.dto.StudentDTO;
-import com.roadjava.statistic.bean.dto.StudentJobDTO;
 import com.roadjava.statistic.bean.res.ResultDTO;
-import com.roadjava.statistic.bean.res.TableResult;
 import com.roadjava.statistic.bean.vo.*;
 import com.roadjava.statistic.service.StatisticService;
-import com.roadjava.statistic.service.StudentJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +13,14 @@ import java.util.List;
 
 /**
  * 学生控制器
- * @author zhaodaowen
- * @see <a href="http://www.roadjava.com">乐之者java</a>
+ * @author 时天晔
+ * @data: 2023/4/16
+ * description:
  */
 @Controller
 @RequestMapping("/statistic")
 @Slf4j
-public class StatisticHandler {
+public class StatisticController {
     @Resource
     private StatisticService statisticService;
 
