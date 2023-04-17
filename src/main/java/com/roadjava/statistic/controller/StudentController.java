@@ -47,6 +47,9 @@ public class StudentController {
     @GetMapping("/toEdit")
     public String deleteById(@RequestParam("selectedId") Long selectedId, HttpServletRequest request){
         request.setAttribute("selectedId",selectedId);
+
+        log.info("--------------");
+        log.info("selectedId:    ",selectedId);
         return "school/student/edit";
     }
 
@@ -65,7 +68,6 @@ public class StudentController {
     public ResultDTO<String> update(StudentDTO dto) {
         return studentService.update(dto);
     }
-
     /**
      * 加载求职表格
      */

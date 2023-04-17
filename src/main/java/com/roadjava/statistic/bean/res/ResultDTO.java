@@ -14,7 +14,9 @@ import java.util.Map;
 public class ResultDTO<T> {
 
     private String errCode;
+
     private String errMsg;
+
     /**
      * 本次返回结果是否成功
      */
