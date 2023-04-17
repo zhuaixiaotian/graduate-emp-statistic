@@ -27,6 +27,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class MajorServiceImpl implements MajorService {
+
     @Resource
     private MajorMapper majorMapper;
     @Resource

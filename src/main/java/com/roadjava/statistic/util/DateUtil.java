@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * @data: 2023/4/16
  * description:
  */
+@Deprecated
 public class DateUtil {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日HH:mm");
 

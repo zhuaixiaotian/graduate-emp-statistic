@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
  * @data: 2023/4/16
  * description:
  */
+@Deprecated
 public class BasePathUtil {
     public static String getBasePath(HttpServletRequest request) {
         String basePath = null;

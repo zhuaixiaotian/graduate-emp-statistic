@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class JobServiceImpl implements JobService {
+
     @Resource
     private JobMapper jobMapper;
 

@@ -29,10 +29,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class StatisticServiceImpl implements StatisticService {
+
     @Resource
     private StatisticMapper statisticMapper;
-    @Resource
-    private MajorMapper majorMapper;
 
 
     @Override

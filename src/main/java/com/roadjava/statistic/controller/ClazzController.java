@@ -23,6 +23,7 @@ import java.util.List;
 @RequestMapping("/clazz")
 @Slf4j
 public class ClazzController {
+
     @Resource
     private ClazzService clazzService;
 

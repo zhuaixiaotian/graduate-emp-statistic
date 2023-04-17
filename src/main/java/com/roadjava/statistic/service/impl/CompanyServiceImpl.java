@@ -27,6 +27,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class CompanyServiceImpl implements CompanyService {
+
     @Resource
     private CompanyMapper companyMapper;
     @Resource

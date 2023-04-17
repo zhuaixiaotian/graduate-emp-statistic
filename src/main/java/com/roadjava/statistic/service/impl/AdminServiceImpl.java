@@ -16,6 +16,7 @@ import javax.annotation.Resource;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
+
     @Resource
     private AdminMapper adminMapper;
     @Override

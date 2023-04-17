@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class AdminController {
+
     @Resource
     private AdminService adminService;
 
@@ -27,6 +28,7 @@ public class AdminController {
     public String toLogin() {
         return "login";
     }
+
     /**
      * 登录
      */
@@ -47,6 +49,7 @@ public class AdminController {
     public String toMain() {
         return "main";
     }
+
     /**
      * 退出登录
      */
