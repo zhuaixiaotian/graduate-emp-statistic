@@ -24,7 +24,8 @@ spring:
     expose-spring-macro-helpers: true #默认true
     suffix: .ftl #spring-boot2.2.0改为了ftlh
     settings:
-      {datetimeFormat: yyyy-MM-dd HH:mm:ss}
+      datetimeFormat: yyyy-MM-dd HH:mm:ss
+      number_format: 0
     request-context-attribute: rc
 
 # 配置文件上传路径

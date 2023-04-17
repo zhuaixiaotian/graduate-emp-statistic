@@ -48,8 +48,6 @@ public class StudentController {
     public String deleteById(@RequestParam("selectedId") Long selectedId, HttpServletRequest request){
         request.setAttribute("selectedId",selectedId);
 
-        log.info("--------------");
-        log.info("selectedId:    ",selectedId);
         return "school/student/edit";
     }
 
