@@ -46,6 +46,9 @@ public class ClazzServiceImpl implements ClazzService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ResultDTO<String> add(ClazzDTO dto) {
+//        // 为班级名称添加年份
+//        String newName = new StringBuilder(dto.getClazzName()).append("(").append(dto.getGraduateYear()).append(")").toString();
+//        dto.setClazzName(newName);
         Clazz entity = dto.toEntity();
         int count = clazzMapper.insert(entity);
         if (count != 1) {
